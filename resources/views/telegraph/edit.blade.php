@@ -14,12 +14,14 @@
 
 </head>
 <body class="antialiased">
-<form action=" {{route('store')}}" method="POST">
+<form  method="POST" action="{{route('telegraph.update',$telegraph->id)}}">
+    @method('PATCH')
     @csrf
     <fieldset>
-        <legend>Контактная информация</legend>
-        <p><label for="name">Имя автора<em>*</em></label><input type="text" name="author"></p>
-        <p><label for="text">Текст</label><input type="text" name="text"></p>
+{{--       @dd($telegraphText)--}}
+        <legend>Изменить контактную информацию</legend>
+        <p><label for="name">Имя автора<em>*</em></label><input type="text" name="author" value="{{$telegraph->author}}"></p>
+        <p><label for="text">Текст</label><input type="text" value="{{$telegraph->text}}" name="text"></p>
     </fieldset>
     <p><input type="submit" value="Отправить"></p>
 </form>

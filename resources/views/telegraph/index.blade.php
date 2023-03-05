@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -21,8 +22,14 @@
     <tr><th>Текст</th><th>Автор</th><th>Длина текста</th><th>Действия</th></tr> <!--ряд с ячейками заголовков-->
 
     @foreach($telegraphs as $telegraph)
-        <tr><td>{{ $telegraph['text'] }}</td><td>{{ $telegraph['author'] }}</td><td>{{ $telegraph['length'] }}</td><td><a href="{{route('edit_text',$telegraph->id)}}" class="text-success">Изменить</a></td>
-            <td><a href="{{route('create_text'), $telegraph->id}}" class="text-success">Удалить</a></td></tr> <!--ряд с ячейками тела таблицы-->
+        <tr><td>{{ $telegraph['text'] }}</td><td>{{ $telegraph['author'] }}</td><td>{{ $telegraph['length'] }}</td>
+            <td><a href="{{route('telegraph.show',$telegraph->id)}}" class="text-success">Смотреть</a></td>
+            <td><form action="{{ route('telegraph.destroy',$telegraph->id) }}" method="Post">
+                    <a class="btn btn-primary" href="{{ route('telegraph.edit',$telegraph->id) }}">Edit</a>
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
     @endforeach
 </table>
 <li><a href="{{ URL::to('telegraph/create') }}">Create</a>

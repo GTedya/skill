@@ -15,7 +15,7 @@
 </head>
 <body class="antialiased">
 
-<form action="{{url('telegraph.store')}}" method="POST">
+<form action="{{route('telegraph.store')}}" method="POST">
     @csrf
     <fieldset>
         <legend>Контактная информация</legend>
